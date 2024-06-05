@@ -1,4 +1,7 @@
-DB=greenlightdb
+ifneq (,$(wildcard ./.env))
+    include .env
+    export
+endif
 
 init:
 	docker run --name $(DB) -e POSTGRES_PASSWORD=pwd -e POSTGRES_USER=postgres -p 5432:5432 -d postgres:latest
@@ -13,3 +16,6 @@ debug:
 
 stop:
 	docker stop $(DB)
+
+migrate-up:
+	migrate -path=./migrations -database=$(DSN) up
