@@ -19,3 +19,6 @@ stop:
 
 migrate-up:
 	migrate -path=./migrations -database=$(DSN) up
+
+test:
+	for i in {1..20}; do curl http://localhost:4000/v1/healthcheck; done
