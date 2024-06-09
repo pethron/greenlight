@@ -22,13 +22,16 @@ type Models struct {
 		Insert(user *User) error
 		GetByEmail(email string) (*User, error)
 		Update(user *User) error
+		GetForToken(tokenScope, tokenPlaintext string) (*User, error)
 	}
+	Tokens TokenModel
 }
 
 func NewModels(db *sql.DB) Models {
 	return Models{
 		Movies: MovieModel{DB: db},
 		Users:  UserModel{DB: db},
+		Tokens: TokenModel{DB: db},
 	}
 }
 
