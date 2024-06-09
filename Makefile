@@ -8,7 +8,7 @@ init:
 
 start:
 	docker start $(DB)
-	go run ./cmd/api
+	go run ./cmd/api -smtp-username=$(SMTP_USERNAME) -smtp-password=$(SMTP_PASSWORD)
 
 debug:
 	docker start $(DB)
